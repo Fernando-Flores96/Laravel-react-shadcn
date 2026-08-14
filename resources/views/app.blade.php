@@ -8,6 +8,20 @@
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
+        <script>
+            (function () {
+                const appearance = '{{ $appearance ?? 'system' }}';
+                if (appearance === 'system') {
+                    const theme = localStorage.getItem('vite-ui-theme') || 'system';
+                    if (theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                        document.documentElement.classList.add('dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                    }
+                }
+            })();
+        </script>
+
         @fonts
 
         @viteReactRefresh
@@ -20,3 +34,4 @@
         <x-inertia::app />
     </body>
 </html>
+
